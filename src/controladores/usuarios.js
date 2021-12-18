@@ -15,7 +15,7 @@ const cadastroUsuario = async (req, res) => {
   try {
     await cadastroUsuarioSchema.validate(req.body);
 
-    const emailExistente = knex('usuarios')
+    const emailExistente = await knex('usuarios')
       .where({ email })
       .first()
 
@@ -25,7 +25,7 @@ const cadastroUsuario = async (req, res) => {
       })
     }
 
-      const usuarioCadastrado = knex('usuarios')
+      const usuarioCadastrado = await knex('usuarios')
         .insert({
           nome,
           email,
