@@ -4,7 +4,6 @@ const cadastroUsuario = async (req, res) => {
     nome,
     email,
     senha,
-    nome_lanchonete
   } = req.body
   
   try {
