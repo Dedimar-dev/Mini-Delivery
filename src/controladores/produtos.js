@@ -81,6 +81,14 @@ const atualizarProduto = async (req, res) => {
   try {
     await atualizacaoProdutoSchema.validate(req.body);
 
+    const produto = await knex('produtos')
+      .where({ id })
+      .first();
+
+    if (!produto) {
+      return res.status(400).json({ message: 'Produto não encontrado.' });
+    }
+
     const produtoAtualizado = await knex('produtos')
       .update({
         nome,
@@ -106,6 +114,14 @@ const deletarProduto = async (req, res) => {
   const { id } = req.params;
 
   try {
+
+    const produto = await knex('produtos')
+      .where({ id })
+      .first();
+
+    if (!produto) {
+      return res.status(400).json({ message: 'Produto não encontrado.' });
+    }
 
     const produtoDeletado = await knex('produtos')
       .del()
