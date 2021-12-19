@@ -37,5 +37,4 @@ const atualizacaoProdutoSchema = yup.object().shape({
 module.exports = {
   cadastroProdutoSchema,
   atualizacaoProdutoSchema
-
 }
