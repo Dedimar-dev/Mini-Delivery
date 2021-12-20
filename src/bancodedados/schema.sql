@@ -11,7 +11,7 @@ create table produtos (
   usuario_id integer not null,
   nome text not null,
   descricao text,
-  preco integer not null,
+  valor integer not null,
   quantidade integer not null,
   foreign key (usuario_id) references usuarios (id)
 )

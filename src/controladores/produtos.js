@@ -8,7 +8,7 @@ const cadastroProduto = async (req, res) => {
   const {
     nome,
     descricao,
-    preco,
+    valor,
     quantidade
   } = req.body
 
@@ -19,7 +19,7 @@ const cadastroProduto = async (req, res) => {
       .insert({
         nome,
         descricao,
-        preco,
+        valor,
         quantidade
       });
 
@@ -72,7 +72,7 @@ const atualizarProduto = async (req, res) => {
   const {
     nome,
     descricao,
-    preco,
+    valor,
     quantidade
   } = req.body
 
@@ -93,7 +93,7 @@ const atualizarProduto = async (req, res) => {
       .update({
         nome,
         descricao,
-        preco,
+        valor,
         quantidade
       })
       .where({ id });

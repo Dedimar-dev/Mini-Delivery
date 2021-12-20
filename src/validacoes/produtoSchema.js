@@ -8,7 +8,7 @@ const cadastroProdutoSchema = yup.object().shape({
   descricao: yup
     .string(),
 
-  preco: yup
+  valor: yup
     .number()
     .required(),
 
@@ -25,7 +25,7 @@ const atualizacaoProdutoSchema = yup.object().shape({
   descricao: yup
     .string(),
 
-  preco: yup
+  valor: yup
     .number()
     .required(),
 
