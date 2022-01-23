@@ -5,3 +5,14 @@ Uma API REST feita para treinar integração com o Front end (<a href="https://m
 -   Listem de produtos
 -   Edição de produto
 -   exclusão de produto
+
+# 🛠️Tecnologias utilizadas
+ - Node.js
+ - API Rest
+ - Express.js
+
+<img src="https://user-images.githubusercontent.com/85937748/150690265-66e64686-4ccc-447e-bc9b-fa9995de3854.png" />
+
+# Autor
+<img src="https://user-images.githubusercontent.com/85937748/150689406-ad12d7cb-f044-4f7a-9f26-8e48f74c018c.jpg" width="150"/>
+<b>Dedimar Santos</b>
