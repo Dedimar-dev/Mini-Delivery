@@ -138,11 +138,26 @@ const deletarProduto = async (req, res) => {
   }
 }
 
+const pesquisarProdutos = async (req, res) => {
+  const {nome} = req.params
+
+  try {
+
+    if (nome) {
+      const produtosPesquisado = await knex('produtos').where('nome', 'like', `%${nome}%`)
+      return res.status(200).json(produtosPesquisado)
+    }
+    
+  } catch ({ message }) {
+    return res.status(400).json({ message })
+  }
+}
 
 module.exports = {
   cadastroProduto,
   atualizarProduto,
   listarProdutos,
   listarProduto,
-  deletarProduto 
+  deletarProduto,
+  pesquisarProdutos  
 }

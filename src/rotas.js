@@ -5,7 +5,7 @@ const rotas = express();
 
 rotas.post('/produtos', produtos.cadastroProduto);
 rotas.get('/produtos', produtos.listarProdutos);
-rotas.get('/produtos/:id', produtos.listarProduto);
+rotas.get('/produtos/:nome', produtos.pesquisarProdutos);
 rotas.put('/produtos/:id', produtos.atualizarProduto);
 rotas.delete('/produtos/:id', produtos.deletarProduto);
 
