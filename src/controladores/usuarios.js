@@ -1,4 +1,6 @@
 const knex = require('../bancodedados/conexao');
+const bcrypt = require('bcrypt')
+
 const {
   cadastroUsuarioSchema,
   atualizacaoUsuarioSchema
@@ -17,30 +19,89 @@ const cadastroUsuario = async (req, res) => {
 
     const emailExistente = await knex('usuarios')
       .where({ email })
-      .first()
+      .first();
 
     if (emailExistente) {
       return res.status(400).json({
-        message:'Email já está sendo usado por outro usuário.'
-      })
+        message: 'Email já está sendo usado por outro usuário.'
+      });
     }
 
-      const usuarioCadastrado = await knex('usuarios')
-        .insert({
-          nome,
-          email,
-          senha,
-          nome_lanchonete
-        });
+   const senhaCriptografada = await bcrypt.hash(senha, 10);
+
+    const { rowCount } = await knex('usuarios')
+      .insert({
+        nome,
+        email,
+        senha: senhaCriptografada,
+        nome_lanchonete
+      });
+
+    if (rowCount === 0) {
+      res.status(200).json({
+        message: 'Usuário não foi cadastrado.'
+      });
+    }
     res.status(200).json({
-      message: 'Cadastrado concluído com sucesso.'
+      message: 'Usuário cadastrado com sucesso.'
     });
-  } catch ({message}) {
-    console.log(message)
+  } catch ({ message }) {
+    return res.status(400).json({ message })
+  }
+
+}
+
+const atualizarUsuario = async (req, res) => {
+  let {
+    nome,
+    email,
+    senha,
+    nome_lanchonete
+  } = req.body
+
+  const usuario = req.usuario;
+
+  try {
+    await atualizacaoUsuarioSchema.validate(req.body);
+
+    if (email !== usuario.email) {
+      const emailExistente = await knex('usuarios')
+        .where({ email })
+        .first();
+
+      if (emailExistente) {
+        return res.status(400).json({
+          message: 'Email já está sendo usado por outro usuário.'
+        });
+      }
+    }
+
+    if (senha) {
+      senha = await bcrypt.hash(senha, 10);
+    }
+
+    const { rowCount } = await knex('usuarios')
+      .update({
+        nome,
+        email,
+        senha: senha? senha : usuario.senha,
+        nome_lanchonete: nome_lanchonete? nome_lanchonete : usuario.nome_lanchonete
+      })
+      .where({ id: usuario.id });
+
+    if (rowCount === 0) {
+      res.status(200).json({ message: 'Usuário não foi atualizado.' });
+    }
+
+    res.status(200).json({ message: 'Usuário atualizado com sucesso.' });
+
+  } catch ({ message }) {
+    return res.status(400).json({ message })
   }
 
 }
 
 module.exports = {
-  cadastroUsuario
+  cadastroUsuario,
+  atualizarUsuario
 }
