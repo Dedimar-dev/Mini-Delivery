@@ -36,7 +36,6 @@ const atualizacaoUsuarioSchema = yup.object().shape({
 
   nome_lanchonete: yup
     .string()
-    .required()
 });
 
 module.exports = {
