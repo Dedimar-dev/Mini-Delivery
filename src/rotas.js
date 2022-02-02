@@ -7,6 +7,7 @@ const verificaToken = require('./filtros/verificaToken')
 const rotas = express();
 
 rotas.post('/usuarios', usuarios.cadastroUsuario);
+rotas.get('/usuarios', usuarios.listarUsuarios);
 rotas.post('/login', login.login);
 
 rotas.use(verificaToken);

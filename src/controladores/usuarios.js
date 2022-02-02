@@ -101,7 +101,19 @@ const atualizarUsuario = async (req, res) => {
 
 }
 
+const listarUsuarios = async (req, res) => {
+
+  try {
+    const usuarios = await knex('usuarios').select('email');
+
+    return res.status(200).json(usuarios);
+  } catch ({ message }) {
+    return res.status(400).json({ message })
+  }
+}
+
 module.exports = {
   cadastroUsuario,
-  atualizarUsuario
+  atualizarUsuario,
+  listarUsuarios
 }
