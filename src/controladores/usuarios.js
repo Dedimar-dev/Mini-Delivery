@@ -11,7 +11,7 @@ const cadastroUsuario = async (req, res) => {
     nome,
     email,
     senha,
-    nome_lanchonete
+    nome_loja
   } = req.body
 
   try {
@@ -34,7 +34,7 @@ const cadastroUsuario = async (req, res) => {
         nome,
         email,
         senha: senhaCriptografada,
-        nome_lanchonete
+        nome_loja
       });
 
     if (rowCount === 0) {
@@ -56,7 +56,7 @@ const atualizarUsuario = async (req, res) => {
     nome,
     email,
     senha,
-    nome_lanchonete
+    nome_loja
   } = req.body
 
   const usuario = req.usuario;
@@ -85,7 +85,7 @@ const atualizarUsuario = async (req, res) => {
         nome,
         email,
         senha: senha? senha : usuario.senha,
-        nome_lanchonete: nome_lanchonete? nome_lanchonete : usuario.nome_lanchonete
+        nome_loja: nome_loja? nome_loja : usuario.nome_loja
       })
       .where({ id: usuario.id });
 

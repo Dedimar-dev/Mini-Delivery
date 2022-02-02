@@ -15,7 +15,7 @@ const cadastroUsuarioSchema = yup.object().shape({
     .min(6)
     .required(),
 
-  nome_lanchonete: yup
+  nome_loja: yup
     .string()
     .required()
 });
@@ -34,7 +34,7 @@ const atualizacaoUsuarioSchema = yup.object().shape({
     .string()
     .min(6),
 
-  nome_lanchonete: yup
+  nome_loja: yup
     .string()
 });
 

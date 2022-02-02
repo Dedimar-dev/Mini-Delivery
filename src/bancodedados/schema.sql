@@ -3,7 +3,7 @@ create table usuarios (
   nome text not null,
   senha text not null,
   email text not null,
-  nome_lanchonete text not null
+  nome_loja text not null
 )
 
 create table produtos (
