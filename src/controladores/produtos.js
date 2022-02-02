@@ -12,6 +12,8 @@ const cadastroProduto = async (req, res) => {
     quantidade
   } = req.body
 
+  const {id} = req.usuario
+
   try {
     await cadastroProdutoSchema.validate(req.body);
 
@@ -20,7 +22,8 @@ const cadastroProduto = async (req, res) => {
         nome,
         descricao,
         valor,
-        quantidade
+        quantidade,
+        usuario_id: id
       });
 
     if (rowCount === 0) {
