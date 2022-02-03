@@ -27,7 +27,7 @@ const cadastroUsuario = async (req, res) => {
       });
     }
 
-   const senhaCriptografada = await bcrypt.hash(senha, 10);
+    const senhaCriptografada = await bcrypt.hash(senha, 10);
 
     const { rowCount } = await knex('usuarios')
       .insert({
@@ -84,8 +84,8 @@ const atualizarUsuario = async (req, res) => {
       .update({
         nome,
         email,
-        senha: senha? senha : usuario.senha,
-        nome_loja: nome_loja? nome_loja : usuario.nome_loja
+        senha: senha ? senha : usuario.senha,
+        nome_loja: nome_loja ? nome_loja : usuario.nome_loja
       })
       .where({ id: usuario.id });
 
@@ -99,6 +99,17 @@ const atualizarUsuario = async (req, res) => {
     return res.status(400).json({ message })
   }
 
+}
+
+const listarUsuario = async (req, res) => {
+
+  try {
+    const usuario = req.usuario;
+    return res.status(200).json(usuario);
+
+  } catch ({ message }) {
+    return res.status(400).json({ message })
+  }
 }
 
 const listarUsuarios = async (req, res) => {
@@ -115,5 +126,6 @@ const listarUsuarios = async (req, res) => {
 module.exports = {
   cadastroUsuario,
   atualizarUsuario,
+  listarUsuario,
   listarUsuarios
 }
