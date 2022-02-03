@@ -12,6 +12,7 @@ rotas.post('/login', login.login);
 
 rotas.use(verificaToken);
 
+rotas.get('/usuario', usuarios.listarUsuario);
 rotas.put('/usuarios', usuarios.atualizarUsuario);
 rotas.post('/produtos', produtos.cadastroProduto);
 rotas.get('/produtos', produtos.listarProdutos);
