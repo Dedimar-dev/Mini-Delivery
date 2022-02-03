@@ -12,7 +12,7 @@ const cadastroProduto = async (req, res) => {
     quantidade
   } = req.body
 
-  const {id} = req.usuario
+  const { id } = req.usuario
 
   try {
     await cadastroProdutoSchema.validate(req.body);
@@ -39,10 +39,11 @@ const cadastroProduto = async (req, res) => {
 }
 
 const listarProdutos = async (req, res) => {
+  const { id } = req.usuario;
 
   try {
 
-    const produtos = await knex('produtos');
+    const produtos = await knex('produtos').where({ usuario_id: id });
 
     return res.status(200).json(produtos);
 
@@ -142,13 +143,14 @@ const deletarProduto = async (req, res) => {
 }
 
 const pesquisarProdutos = async (req, res) => {
-  const { nome } = req.params
+  const { nome } = req.params;
+  const { id } = req.usuario
 
   try {
 
     if (nome) {
-      const produtosPesquisado = await knex('produtos').where('nome', 'ilike', `%${nome}%`)
-      return res.status(200).json(produtosPesquisado)
+      const produtosPesquisados = await knex('produtos').where('nome', 'ilike', `%${nome}%`).where({usuario_id: id})
+      return res.status(200).json(produtosPesquisados)
     }
 
   } catch ({ message }) {
