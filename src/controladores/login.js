@@ -12,7 +12,7 @@ const login = async (req, res) => {
     const usuario = await knex('usuarios').where({ email }).first();
 
     if (!usuario) {
-      return res.status(404).json({ message: 'O usuario não foi encontrado' })
+      return res.status(404).json({ message: 'Usuário não foi encontrado' })
     }
 
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha);

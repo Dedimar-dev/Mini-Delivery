@@ -71,7 +71,7 @@ const atualizarUsuario = async (req, res) => {
 
       if (emailExistente) {
         return res.status(400).json({
-          message: 'Email já está sendo usado por outro usuário.'
+          message: 'E-mail já está sendo usado por outro usuário.'
         });
       }
     }

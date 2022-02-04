@@ -32,4 +32,3 @@ const verificaToken = async (req, res, next) => {
 }
 
 module.exports = verificaToken;
-
